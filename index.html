@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OverlordQQ</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --primary: #2b2d42;
+            --secondary: #8d99ae;
+            --accent: #ef233c;
+            --light: #edf2f4;
+            --dark: #1a1a2e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 100%;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .header .subtitle {
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin: 5px 0;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #d90429;
+        }
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        .btn-secondary:hover {
+            background-color: #6c757d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2024</h1>
+            <h2>OverlordQQ</h2>
+            <div class="subtitle">Покупай Telegram Stars выгодно</div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Вывести</h3>
+            <div class="input-group">
+                <input type="number" id="stars-amount" placeholder="Количество Stars">
+            </div>
+            <button class="btn" onclick="buyStars()">STARS</button>
+            
+            <div class="input-group" style="margin-top: 15px;">
+                <input type="number" id="ton-amount" placeholder="Количество TON">
+            </div>
+            <button class="btn btn-secondary" onclick="buyTon()">TON</button>
+            
+            <p style="font-size: 12px; text-align: center; margin-top: 10px;">
+                Купить звёзды<br>Покупай Telegram Stars выгодно
+            </p>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">История транзакций</h3>
+            <button class="btn" onclick="loadHistory()">Обновить историю</button>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>Концепт</th>
+                        <th>Маркет</th>
+                        <th>Чеки</th>
+                        <th>Партнёрство</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Данные будут загружены динамически -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.BackButton.show();
+        tg.BackButton.onClick(() => tg.close());
+
+        // Функция покупки Stars
+        function buyStars() {
+            const amount = document.getElementById('stars-amount').value;
+            if (!amount) {
+                alert('Введите количество Stars');
+                return;
+            }
+            
+            tg.sendData(JSON.stringify({
+                action: 'buy_stars',
+                amount: amount
+            }));
+        }
+
+        // Функция покупки TON
+        function buyTon() {
+            const amount = document.getElementById('ton-amount').value;
+            if (!amount) {
+                alert('Введите количество TON');
+                return;
+            }
+            
+            tg.sendData(JSON.stringify({
+                action: 'buy_ton',
+                amount: amount
+            }));
+        }
+
+        // Функция загрузки истории
+        function loadHistory() {
+            tg.sendData(JSON.stringify({
+                action: 'get_history'
+            }));
+        }
+
+        // Обработчик входящих данных от бота
+        tg.onEvent('mainButtonClicked', () => {
+            tg.sendData(JSON.stringify({action: 'get_history'}));
+        });
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            // Можно добавить загрузку начальных данных
+            loadHistory();
+        });
+
+        // Обработчик сообщений от бота (для истории)
+        window.addEventListener('message', (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                if (Array.isArray(data)) {
+                    updateHistoryTable(data);
+                }
+            } catch (e) {
+                console.error('Error parsing data:', e);
+            }
+        });
+
+        // Обновление таблицы истории
+        function updateHistoryTable(transactions) {
+            const tbody = document.querySelector('#history-table tbody');
+            tbody.innerHTML = '';
+            
+            transactions.forEach(tx => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${tx.concept || ''}</td>
+                    <td>${tx.market || ''}</td>
+                    <td>${tx.checks || ''}</td>
+                    <td>${tx.partnership || ''}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

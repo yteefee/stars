@@ -3,128 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OverlordQQ</title>
+    <title>WalletStars - Купить Telegram Stars</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --primary: #2b2d42;
-            --secondary: #8d99ae;
-            --accent: #ef233c;
-            --light: #edf2f4;
-            --dark: #1a1a2e;
+            --primary: #2AABEE;
+            --secondary: #2088C9;
+            --accent: #FFD700;
+            --dark: #17212B;
+            --light: #F5F5F5;
+            --success: #2ECC71;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
         .container {
             max-width: 100%;
-            padding: 20px;
+            padding: 15px;
         }
-        .header {
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 15px;
             text-align: center;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
-        .header h1 {
-            color: var(--primary);
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
             margin-bottom: 5px;
         }
-        .header .subtitle {
-            color: var(--secondary);
-            font-size: 14px;
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 15px 0 10px;
+            color: var(--dark);
         }
-        .section {
+
+        .card {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 15px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
-        .section-title {
-            color: var(--primary);
-            margin-top: 0;
-            font-size: 18px;
+
+        .card:active {
+            transform: scale(0.98);
         }
+
         .btn {
-            background-color: var(--accent);
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            margin: 10px 0;
             cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-            margin: 5px 0;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
+
         .btn:hover {
-            background-color: #d90429;
+            opacity: 0.9;
+            box-shadow: 0 4px 8px rgba(42, 171, 238, 0.3);
         }
-        .btn-secondary {
-            background-color: var(--secondary);
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #FFA500);
         }
-        .btn-secondary:hover {
-            background-color: #6c757d;
+
+        .divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
         }
+
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 5px 0;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .percentage-badge {
+            background-color: var(--success);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin: 10px 0;
         }
+
         th, td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            color: #666;
+            font-weight: 500;
             font-size: 14px;
         }
-        th {
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
             background-color: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
+            font-weight: bold;
         }
-        .input-group {
-            margin-bottom: 10px;
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
         }
-        input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--dark);
+                color: white;
+            }
+            
+            .card, .stats-card {
+                background-color: #1E2C3A;
+            }
+            
+            th, .stat-label {
+                color: #aaa;
+            }
+            
+            td {
+                border-bottom-color: #2C3E50;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header>
             <h1>2024</h1>
-            <h2>OverlordQQ</h2>
-            <div class="subtitle">Покупай Telegram Stars выгодно</div>
-        </div>
+            <p>OverlordQQ</p>
+        </header>
 
-        <div class="section">
-            <h3 class="section-title">Вывести</h3>
-            <div class="input-group">
-                <input type="number" id="stars-amount" placeholder="Количество Stars">
-            </div>
-            <button class="btn" onclick="buyStars()">STARS</button>
-            
-            <div class="input-group" style="margin-top: 15px;">
-                <input type="number" id="ton-amount" placeholder="Количество TON">
-            </div>
-            <button class="btn btn-secondary" onclick="buyTon()">TON</button>
-            
-            <p style="font-size: 12px; text-align: center; margin-top: 10px;">
+        <div class="card">
+            <h2>Вывести</h2>
+            <button class="btn" id="withdraw-stars">STARS</button>
+            <button class="btn" id="withdraw-ton">TON</button>
+            <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #666;">
                 Купить звёзды<br>Покупай Telegram Stars выгодно
             </p>
         </div>
 
-        <div class="section">
-            <h3 class="section-title">История транзакций</h3>
-            <button class="btn" onclick="loadHistory()">Обновить историю</button>
-            <table id="history-table">
+        <div class="card">
+            <h2>История транзакций</h2>
+            <table>
                 <thead>
                     <tr>
                         <th>Концепт</th>
@@ -133,94 +221,108 @@
                         <th>Партнёрство</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Данные будут загружены динамически -->
+                <tbody id="transactions">
+                    <tr>
+                        <td>@WalletStarsBot</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="stats-card">
+            <h2>WalletStars | Купить Звёзды</h2>
+            <div class="percentage-badge">50%</div>
+            <p class="stat-label">Твой процент</p>
+            
+            <div class="divider"></div>
+            
+            <p class="stat-label">Приглашено</p>
+            <p class="stat-value">0</p>
+            
+            <p class="stat-label">Заработок</p>
+            <p class="stat-value">0.00 TON</p>
+            
+            <button class="btn btn-accent" id="invite-btn">Пригласить</button>
+        </div>
+
+        <div class="card">
+            <h2>Маркет WalletStars</h2>
+            <p>Покупай и продавай звёзды. Дари Premium своим друзьям и не только.</p>
+            
+            <div class="divider"></div>
+            
+            <h3>Купить звёзды</h3>
+            <button class="btn">Купить</button>
+            
+            <div class="divider"></div>
+            
+            <h3>Продать звёзды</h3>
+            <button class="btn">Продать</button>
+            
+            <div class="divider"></div>
+            
+            <div class="menu-item">
+                <div class="menu-icon">M</div>
+                <span>Маркет</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">Ч</div>
+                <span>Чеки</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-icon">П</div>
+                <span>Партнёрство</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            @WalletStarsBot
         </div>
     </div>
 
     <script>
-        // Инициализация Telegram WebApp
+        // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
+        
+        // Растягиваем на весь экран
         tg.expand();
-        tg.BackButton.show();
-        tg.BackButton.onClick(() => tg.close());
-
-        // Функция покупки Stars
-        function buyStars() {
-            const amount = document.getElementById('stars-amount').value;
-            if (!amount) {
-                alert('Введите количество Stars');
-                return;
-            }
-            
-            tg.sendData(JSON.stringify({
-                action: 'buy_stars',
-                amount: amount
-            }));
+        
+        // Получаем данные пользователя
+        const user = tg.initDataUnsafe.user;
+        if (user) {
+            // Можно использовать user.first_name, user.last_name и т.д.
         }
-
-        // Функция покупки TON
-        function buyTon() {
-            const amount = document.getElementById('ton-amount').value;
-            if (!amount) {
-                alert('Введите количество TON');
-                return;
-            }
-            
-            tg.sendData(JSON.stringify({
-                action: 'buy_ton',
-                amount: amount
-            }));
-        }
-
-        // Функция загрузки истории
-        function loadHistory() {
-            tg.sendData(JSON.stringify({
-                action: 'get_history'
-            }));
-        }
-
-        // Обработчик входящих данных от бота
-        tg.onEvent('mainButtonClicked', () => {
-            tg.sendData(JSON.stringify({action: 'get_history'}));
+        
+        // Обработчики кнопок
+        document.getElementById('withdraw-stars').addEventListener('click', () => {
+            tg.showAlert('Функция вывода STARS в разработке');
         });
-
-        // Инициализация при загрузке
+        
+        document.getElementById('withdraw-ton').addEventListener('click', () => {
+            tg.showAlert('Функция вывода TON в разработке');
+        });
+        
+        document.getElementById('invite-btn').addEventListener('click', () => {
+            tg.openTelegramLink('https://t.me/WalletStarsBot?startapp=1072790585');
+        });
+        
+        // Анимация при загрузке
         document.addEventListener('DOMContentLoaded', () => {
-            // Можно добавить загрузку начальных данных
-            loadHistory();
-        });
-
-        // Обработчик сообщений от бота (для истории)
-        window.addEventListener('message', (event) => {
-            try {
-                const data = JSON.parse(event.data);
-                if (Array.isArray(data)) {
-                    updateHistoryTable(data);
-                }
-            } catch (e) {
-                console.error('Error parsing data:', e);
-            }
-        });
-
-        // Обновление таблицы истории
-        function updateHistoryTable(transactions) {
-            const tbody = document.querySelector('#history-table tbody');
-            tbody.innerHTML = '';
-            
-            transactions.forEach(tx => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${tx.concept || ''}</td>
-                    <td>${tx.market || ''}</td>
-                    <td>${tx.checks || ''}</td>
-                    <td>${tx.partnership || ''}</td>
-                `;
-                tbody.appendChild(row);
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.3s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
             });
-        }
+        });
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WalletStars</title>
+    <title>FastStars</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
@@ -41,8 +41,8 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         header {
@@ -52,7 +52,6 @@
             text-align: center;
             position: relative;
             margin-bottom: 15px;
-            border-radius: 0 0 15px 15px;
         }
 
         h1 {
@@ -66,6 +65,12 @@
             font-weight: 600;
             margin: 15px 0 10px;
             color: var(--dark);
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px 0;
         }
 
         .card {
@@ -121,22 +126,6 @@
 
         .menu-item:last-child {
             border-bottom: none;
-        }
-
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary);
-            border-radius: 4px;
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .checkbox.checked {
-            background-color: var(--primary);
-            color: white;
         }
 
         .nav {
@@ -199,23 +188,22 @@
             font-size: 12px;
         }
 
-        input[type="number"] {
+        table {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            border-collapse: collapse;
             margin: 10px 0;
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin: 10px 0;
-            background: white;
-            font-size: 16px;
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: #666;
+            font-weight: 500;
         }
 
         /* Темная тема */
@@ -235,7 +223,7 @@
                 border-color: #333;
             }
 
-            .stat-label {
+            .stat-label, th {
                 color: #aaa;
             }
 
@@ -247,9 +235,8 @@
                 border-color: #333;
             }
 
-            input, select {
-                background-color: #2d2d2d;
-                border-color: #333;
+            .btn-outline {
+                background-color: #1e1e1e;
                 color: white;
             }
         }
@@ -257,87 +244,92 @@
 </head>
 <body>
     <header>
-        <h1>WalletStars | Купить 3вёзды</h1>
+        <h1 id="header-title">2024</h1>
     </header>
 
     <!-- Страница 1: Главная -->
     <div class="page active" id="page1">
         <div class="card">
-            <h2>#233697</h2>
-            <div class="divider"></div>
-            <h2>Вывести</h2>
-            <button class="btn">Пополнить</button>
+            <h2>FastStars</h2>
             
+            <h3>Вывести</h3>
             <div class="menu-item">
-                <div class="checkbox"></div>
-                <span>STARS<br><small>0.008</small></span>
+                <span>STARS</span>
             </div>
+            <div class="menu-item">
+                <span>TON</span>
+            </div>
+            <div class="menu-item">
+                <span>Купить звёзды</span>
+            </div>
+            <p style="font-size: 14px; color: #666; margin-top: 5px;">
+                Покупай телеграм звезды выгодно
+            </p>
             
-            <div class="menu-item">
-                <div class="checkbox"></div>
-                <span>TON<br><small>0.008</small></span>
-            </div>
-            
-            <div class="menu-item">
-                <div class="checkbox"></div>
-                <span>USDT<br><small>0.00 08</small></span>
-            </div>
-            
-            <div class="menu-item">
-                <div class="checkbox"></div>
-                <span>История транзакций</span>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Купить звёзды</h2>
-            <p>Покупай телеграм звезды выгодно</p>
-            <button class="btn btn-outline">View</button>
+            <h3 style="margin-top: 20px;">История транзакций</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Концепт</th>
+                        <th>Маркет</th>
+                        <th>Чеки</th>
+                        <th>Партнёрство</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@WalletStarsBot</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <!-- Страница 2: Маркет -->
     <div class="page" id="page2">
         <div class="card">
-            <h2>Маркет WalletStars</h2>
+            <h2>Маркет FastStars</h2>
             <p>Покупай и продавай звёзды. Дари Premium своим друзьям и не только.</p>
+            
             <div class="divider"></div>
             
-            <h2>Купить звёзды</h2>
+            <h3>Купить звёзды</h3>
             <button class="btn">Купить</button>
             
             <div class="divider"></div>
             
-            <h2>Продать звёзды</h2>
+            <h3>Продать звёзды</h3>
             <button class="btn">Продать</button>
-        </div>
-    </div>
-
-    <!-- Страница 3: Чеки -->
-    <div class="page" id="page3">
-        <div class="card">
-            <h2>Stars Чеки</h2>
-            <p>Чеки – уникальная функция нашего кошелька, с помощью которой вы можете делиться звёздами с другими пользователями</p>
             
-            <select>
-                <option>1 акт.</option>
-                <option>По 1 - 100.000</option>
-            </select>
-            
-            <p><small>Если без пароля - оставь пустым</small></p>
-            
-            <button class="btn">Создать чек</button>
+            <div class="divider"></div>
             
             <div class="menu-item">
-                <div class="checkbox"></div>
-                <span>История чеков</span>
+                <span>Кошелёк</span>
             </div>
+            <div class="menu-item">
+                <span>Маркет</span>
+            </div>
+            <div class="menu-item">
+                <span>Чеки</span>
+            </div>
+            <div class="menu-item">
+                <span>Партнёрство</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            @WalletStarsBot
         </div>
     </div>
 
-    <!-- Страница 4: Партнерка -->
-    <div class="page" id="page4">
+    <!-- Страница 3: Партнерка -->
+    <div class="page" id="page3">
         <div class="card">
+            <h2>FastStars | Купить Звёзды</h2>
+            
             <div class="stats">
                 <span class="badge">50%</span>
                 <p class="stat-label">Твой процент</p>
@@ -356,29 +348,22 @@
             <div class="divider"></div>
             
             <div class="menu-item">
-                <div class="checkbox"></div>
                 <span>Кошелёк</span>
             </div>
-            
             <div class="menu-item">
-                <div class="checkbox checked"></div>
                 <span>Маркет</span>
             </div>
-            
             <div class="menu-item">
-                <div class="checkbox checked"></div>
                 <span>Чеки</span>
             </div>
-            
             <div class="menu-item">
-                <div class="checkbox checked"></div>
                 <span>Партнёрство</span>
             </div>
         </div>
-    </div>
-
-    <div class="footer">
-        @WalletStarsBot
+        
+        <div class="footer">
+            @WalletStarsBot
+        </div>
     </div>
 
     <!-- Навигационное меню -->
@@ -390,9 +375,6 @@
             <i>🛒</i><br>Маркет
         </div>
         <div class="nav-item" data-page="page3">
-            <i>🧾</i><br>Чеки
-        </div>
-        <div class="nav-item" data-page="page4">
             <i>👥</i><br>Партнерка
         </div>
     </div>
@@ -417,19 +399,25 @@
                 this.classList.add('active');
                 const pageId = this.getAttribute('data-page');
                 document.getElementById(pageId).classList.add('active');
+                
+                // Обновляем заголовок
+                updateHeaderTitle(pageId);
             });
         });
         
-        // Обработка чекбоксов
-        document.querySelectorAll('.checkbox').forEach(box => {
-            box.addEventListener('click', function() {
-                this.classList.toggle('checked');
-            });
-        });
+        // Обновление заголовка
+        function updateHeaderTitle(pageId) {
+            const titles = {
+                'page1': '2024',
+                'page2': 'Маркет FastStars',
+                'page3': 'FastStars | Купить Звёзды'
+            };
+            document.getElementById('header-title').textContent = titles[pageId];
+        }
         
         // Кнопка приглашения
         document.getElementById('invite-btn').addEventListener('click', function() {
-            tg.openTelegramLink('https://t.me/WalletStarsBot?startapp=5533141496');
+            tg.openTelegramLink('https://t.me/WalletStarsBot?startapp=1072790585');
         });
         
         // Анимация при загрузке
